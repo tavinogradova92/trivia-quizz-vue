@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router';
 import Home from './views/Home';
-import QuestionOne from './views/QuestionOne'
+import Questions from './views/Questions'
 
 const routes = [
     {
@@ -8,8 +8,8 @@ const routes = [
         component: Home
     },
     {
-        path: '/questions/1',
-        component: QuestionOne
+        path: '/questions',
+        component: Questions
     }
 ];
 

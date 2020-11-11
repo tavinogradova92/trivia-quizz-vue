@@ -1,11 +1,11 @@
 <template>
     <div id="home">
         <h1>Trivia Quiz. Animals</h1>
-        <h2>Are you ready to challenge yourself? Then clicpush k the button start the game!</h2>
+        <h2>Are you ready to challenge yourself? Then push the button to start the game!</h2>
         <router-link 
             tag="button" 
             class="button effect" 
-            to="/questions/1">
+            to="/questions">
                 <span>Start</span>
         </router-link>
     </div>
