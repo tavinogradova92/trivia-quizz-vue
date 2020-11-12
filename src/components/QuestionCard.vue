@@ -1,24 +1,19 @@
 <template>
-    <div id="question-card">
+    <div id="question-card" >
         <div id="question-box">
-            <h2>Question 
-                <span 
-                    v-bind:key="question.question" 
-                    v-for="question in questions">
-                        {{questions.indexOf(question) + 1}}
-                </span>
-            </h2>
-            <div v-bind:key="question.question" v-for="question in questions">
-                <h3>{{ question.question }}</h3>
+            <div>
+                <div>
+                    <h2>Question <span>{{ currentQuestionIndex + 1 }}</span></h2>
+                    <div class="question-name">
+                        <h3>{{ questions[currentQuestionIndex].question }}</h3>
+                    </div>
+                    <div v-bind:key="answer" v-for="answer in listOfAnswers">
+                        <button id="submit-button" >{{ answer }}</button>
+                    </div>
+                    <p>Status bar</p>
+                </div>
             </div>
-            <form>
-                <input type="radio" id="true" name="answer" value="true" default>
-                <label for="true">True</label><br>
-                <input type="radio" id="false" name="answer" value="false">
-                <label for="false">False</label><br>
-                <button id="submit-button" type="submit">OK</button>
-            </form>
-            <p>Status bar</p>
+            
         </div>
     </div>
 </template>
@@ -27,7 +22,23 @@
 export default {
     name: 'questions',
     components: {},
-    props: ["questions"]
+    props: ["questions"],
+    data() {
+        return {
+            currentQuestionIndex: 0
+        }
+    },
+    computed: {
+        listOfAnswers() {
+            let answersArray = [];
+            answersArray.push(this.questions[this.currentQuestionIndex].correct_answer);
+            let incorrect = this.questions[this.currentQuestionIndex].incorrect_answers;
+            for(let i = 0 ; i < incorrect.length; i++) {
+                answersArray.push(incorrect[i]);
+            }
+            return answersArray;
+        }
+    }   
 }
 </script>
 
@@ -42,7 +53,7 @@ export default {
 }
 #question-box {
     display: grid;
-    height: 70vh;
+    height: 80vh;
     width: 40vw;
     justify-items: center;
     align-items: center;
@@ -50,22 +61,24 @@ export default {
     color: #000000;
 }
 h2 {
+    display: flex;
+    justify-content: center;
     font-size: 4em;
 }
 h1 {
     font-size: 3em;
 }
-#true {
-    margin-bottom: 3vh;
-}
-#false {
-    margin-bottom: 3vh;
+.question-name {
+    margin: 5%;
+    display: flex;
+    justify-content: center;
 }
 #submit-button {
     height: 5vh;
     width: 5vw;
     border: 1px solid rgb(189, 189, 189);
     border-radius: 20px;
+    margin-top: 5%;
     cursor: pointer;
 }
 #submit-button:hover {
