@@ -6,7 +6,7 @@
                 <h3 v-html="(questions[currentQuestionIndex].question)"></h3>
             </div>
             <div id="answers-box" v-bind:key="answer" v-for="answer in listOfAnswers">
-                <button id="submit-button" @click="onAnswerClicked(answer)">{{ answer }}</button>
+                <button id="submit-button" v-html="answer" @click="onAnswerClicked(answer)"></button>
             </div>
         </div> 
     </div>

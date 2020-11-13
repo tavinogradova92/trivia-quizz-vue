@@ -3,6 +3,7 @@
         <div id="results-card">
             <h1>Results</h1>
             <h2>Final score: {{ this.$store.state.score }} out of 100</h2>
+            
         </div>
     </div>
 </template>

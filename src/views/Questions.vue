@@ -5,24 +5,19 @@
 </template>
 
 <script>
-import axios from 'axios';
 import QuestionCard from '../components/QuestionCard';
+import { mapState } from 'vuex'
 
 export default {
     name: 'questions',
     components: {
         QuestionCard
     },
-    data() {
-        return {
-            questions: []
-        }
-    },
-    methods: {},
-    created() {
-        axios.get('https://opentdb.com/api.php?amount=10&category=27&difficulty=medium')
-            .then(res => this.questions = res.data.results)
-            .catch(err => console.log(err))
+    computed: mapState([
+        'questions'
+    ]),
+    mounted() {
+        this.$store.dispatch('fetchQuestions')
     }
 }
 </script>
