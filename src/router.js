@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router';
 import Home from './views/Home';
 import Questions from './views/Questions'
+import Results from './views/Results'
 
 const routes = [
     {
@@ -10,6 +11,10 @@ const routes = [
     {
         path: '/questions',
         component: Questions
+    },
+    {
+        path: '/results',
+        component: Results
     }
 ];
 

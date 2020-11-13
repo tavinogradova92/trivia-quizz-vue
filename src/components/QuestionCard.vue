@@ -5,7 +5,7 @@
                 <div>
                     <h2>Question {{ displayedIndex }}</h2>
                     <div class="question-name">
-                        <h3 v-html="(questions[currentQuestionIndex].question)">{{ questions[currentQuestionIndex].question }}</h3>
+                        <h3 v-html="(questions[currentQuestionIndex].question)"></h3>
                     </div>
                     <div id="answers-box" v-bind:key="answer" v-for="answer in listOfAnswers">
                         <button id="submit-button" @click="onAnswerClicked(answer)">{{ answer }}</button>
@@ -14,7 +14,7 @@
                 </div>
             </div>
             
-        </div>
+        </div> 
     </div>
 </template>
 
@@ -31,10 +31,17 @@ export default {
     },
     methods: {
         onAnswerClicked: function(answer) {
-            if(answer == this.questions[this.currentQuestionIndex].correct_answer) {
-                this.score += 100;
+            if(this.currentQuestionIndex < this.questions.length-1) {
+                if(answer == this.questions[this.currentQuestionIndex].correct_answer) {
+                    this.score += 10;
+                }
+                this.currentQuestionIndex ++;
+            } else if (this.currentQuestionIndex == this.questions.length-1) {
+                if(answer == this.questions[this.currentQuestionIndex].correct_answer) {
+                    this.score += 10;
+                }
+                this.$router.push({ path: '/results'});
             }
-            this.currentQuestionIndex ++;
         }
     },
     computed: {
@@ -66,8 +73,8 @@ export default {
 }
 #question-box {
     display: grid;
-    height: 80vh;
-    width: 40vw;
+    height: 70vh;
+    width: 70vw;
     justify-items: center;
     align-items: center;
     background-color: #ffffff;
