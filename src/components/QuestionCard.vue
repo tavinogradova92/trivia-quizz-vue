@@ -1,19 +1,13 @@
 <template>
     <div id="question-card" >
         <div id="question-box">
-            <div>
-                <div>
-                    <h2>Question {{ displayedIndex }}</h2>
-                    <div class="question-name">
-                        <h3 v-html="(questions[currentQuestionIndex].question)"></h3>
-                    </div>
-                    <div id="answers-box" v-bind:key="answer" v-for="answer in listOfAnswers">
-                        <button id="submit-button" @click="onAnswerClicked(answer)">{{ answer }}</button>
-                    </div>
-                    <p>Status bar</p>
-                </div>
+            <h2>Question {{ displayedIndex }}</h2>
+            <div class="question-name">
+                <h3 v-html="(questions[currentQuestionIndex].question)"></h3>
             </div>
-            
+            <div id="answers-box" v-bind:key="answer" v-for="answer in listOfAnswers">
+                <button id="submit-button" @click="onAnswerClicked(answer)">{{ answer }}</button>
+            </div>
         </div> 
     </div>
 </template>
@@ -75,6 +69,7 @@ export default {
     display: grid;
     height: 70vh;
     width: 70vw;
+    padding-bottom: 5%;
     justify-items: center;
     align-items: center;
     background-color: #ffffff;
