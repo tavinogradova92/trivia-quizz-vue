@@ -3,7 +3,9 @@
         <div id="results-card">
             <h1>Results</h1>
             <h2>Final score: {{ this.$store.state.score }} out of 100</h2>
-            
+            <div id="answers-box" v-bind:key="answer" v-for="answer in listOfAnswers">
+                <p v-html="answer"></p>
+            </div>
         </div>
     </div>
 </template>

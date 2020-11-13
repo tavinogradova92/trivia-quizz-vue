@@ -3,9 +3,9 @@
         <div id="question-box">
             <h2>Question {{ displayedIndex }}</h2>
             <div class="question-name">
-                <h3 v-html="(questions[currentQuestionIndex].question)"></h3>
+                <h3 v-html="(questions[this.$store.state.currentQuestionIndex].question)"></h3>
             </div>
-            <div id="answers-box" v-bind:key="answer" v-for="answer in listOfAnswers">
+            <div id="answers-box" v-bind:key="answer" v-for="answer in listOfItems">
                 <button id="submit-button" v-html="answer" @click="onAnswerClicked(answer)"></button>
             </div>
         </div> 
@@ -17,38 +17,30 @@ export default {
     name: 'questions',
     components: {},
     props: ["questions"],
-    data() {
-        return {
-            currentQuestionIndex: 0
-        }
-    },
     methods: {
         onAnswerClicked: function(answer) {
-            if(this.currentQuestionIndex < this.questions.length-1) {
-                if(answer == this.questions[this.currentQuestionIndex].correct_answer) {
+            if(this.$store.state.currentQuestionIndex < this.questions.length-1) {
+                if(answer == this.questions[this.$store.state.currentQuestionIndex].correct_answer) {
                     this.$store.commit('increment');
+                    this.$store.commit('listOfAnswers');
                 }
-                this.currentQuestionIndex ++;
-            } else if (this.currentQuestionIndex == this.questions.length-1) {
-                if(answer == this.questions[this.currentQuestionIndex].correct_answer) {
+                this.$store.state.currentQuestionIndex ++;
+            } else if (this.$store.state.currentQuestionIndex == this.questions.length-1) {
+                if(answer == this.questions[this.$store.state.currentQuestionIndex].correct_answer) {
                     this.$store.commit('increment');
+                    this.$store.commit('listOfAnswers');
                 }
                 this.$router.push({ path: '/results'});
             }
         }
     },
     computed: {
-        listOfAnswers() {
-            let answersArray = [];
-            answersArray.push(this.questions[this.currentQuestionIndex].correct_answer);
-            let incorrect = this.questions[this.currentQuestionIndex].incorrect_answers;
-            for(let i = 0 ; i < incorrect.length; i++) {
-                answersArray.push(incorrect[i]);
-            }
-            return answersArray;
+        listOfItems() {
+            let listOfItems=this.$store.commit('listOfAnswers');
+            return listOfItems;
         },
         displayedIndex() {
-            let displayedIndex = this.currentQuestionIndex + 1;
+            let displayedIndex = this.$store.state.currentQuestionIndex + 1;
             return displayedIndex;
         }
     }   

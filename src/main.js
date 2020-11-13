@@ -13,8 +13,9 @@ Vue.config.productionTip = false
 const store = new Vuex.Store({
   state: {
       score: 0,
+      currentQuestionIndex: 0,
       questions: [],
-      trackedAnswers: {}
+      answersArray: []
   },
   getters: {
     questions: state => {
@@ -25,12 +26,20 @@ const store = new Vuex.Store({
       increment(state) {
           state.score += 10;
       },
+      incrementIndex(state) {
+        state.score ++;
+    },
       SET_Questions (state, questions) {
         state.questions = questions
-    },
-      storeAnswer(state) {
-        state.trackedAnswers
-      }
+      },
+      listOfAnswers(state) {
+        state.answersArray.push(state.questions[state.currentQuestionIndex].correct_answer);
+        let incorrect = state.questions[state.currentQuestionIndex].incorrect_answers;
+        for(let i = 0 ; i < incorrect.length; i++) {
+          state.answersArray.push(incorrect[i]);
+        }
+        return state.answersArray;
+    }
   },
   actions: {
     fetchQuestions({commit}) {
