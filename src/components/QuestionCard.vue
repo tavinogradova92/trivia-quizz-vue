@@ -19,20 +19,19 @@ export default {
     props: ["questions"],
     data() {
         return {
-            currentQuestionIndex: 0,
-            score: 0
+            currentQuestionIndex: 0
         }
     },
     methods: {
         onAnswerClicked: function(answer) {
             if(this.currentQuestionIndex < this.questions.length-1) {
                 if(answer == this.questions[this.currentQuestionIndex].correct_answer) {
-                    this.score += 10;
+                    this.$store.commit('increment');
                 }
                 this.currentQuestionIndex ++;
             } else if (this.currentQuestionIndex == this.questions.length-1) {
                 if(answer == this.questions[this.currentQuestionIndex].correct_answer) {
-                    this.score += 10;
+                    this.$store.commit('increment');
                 }
                 this.$router.push({ path: '/results'});
             }
