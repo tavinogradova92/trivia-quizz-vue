@@ -3,12 +3,12 @@
         <div id="question-box">
             <div>
                 <div>
-                    <h2>Question <span>{{ currentQuestionIndex + 1 }}</span></h2>
+                    <h2>Question {{ displayedIndex }}</h2>
                     <div class="question-name">
-                        <h3>{{ questions[currentQuestionIndex].question }}</h3>
+                        <h3 v-html="(questions[currentQuestionIndex].question)">{{ questions[currentQuestionIndex].question }}</h3>
                     </div>
-                    <div v-bind:key="answer" v-for="answer in listOfAnswers">
-                        <button id="submit-button" >{{ answer }}</button>
+                    <div id="answers-box" v-bind:key="answer" v-for="answer in listOfAnswers">
+                        <button id="submit-button" @click="onAnswerClicked(answer)">{{ answer }}</button>
                     </div>
                     <p>Status bar</p>
                 </div>
@@ -25,7 +25,16 @@ export default {
     props: ["questions"],
     data() {
         return {
-            currentQuestionIndex: 0
+            currentQuestionIndex: 0,
+            score: 0
+        }
+    },
+    methods: {
+        onAnswerClicked: function(answer) {
+            if(answer == this.questions[this.currentQuestionIndex].correct_answer) {
+                this.score += 100;
+            }
+            this.currentQuestionIndex ++;
         }
     },
     computed: {
@@ -37,6 +46,10 @@ export default {
                 answersArray.push(incorrect[i]);
             }
             return answersArray;
+        },
+        displayedIndex() {
+            let displayedIndex = this.currentQuestionIndex + 1;
+            return displayedIndex;
         }
     }   
 }
@@ -63,19 +76,24 @@ export default {
 h2 {
     display: flex;
     justify-content: center;
-    font-size: 4em;
+    font-size: 3em;
 }
 h1 {
     font-size: 3em;
 }
 .question-name {
-    margin: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
     display: flex;
+    justify-content: center;
+}
+#answers-box {
+    display: grid;
     justify-content: center;
 }
 #submit-button {
     height: 5vh;
-    width: 5vw;
+    width: 20vw;
     border: 1px solid rgb(189, 189, 189);
     border-radius: 20px;
     margin-top: 5%;
@@ -83,7 +101,7 @@ h1 {
 }
 #submit-button:hover {
     animation: backgroundchanger 0.5s ease-out alternate;
-    -webkit-animation: backgroundchanger 0.5 sease-in-out;
+    -webkit-animation: backgroundchanger 0.5 ease-in-out;
     -o-animation: backgroundchanger 0.5s linear;
     -moz-animation: backgroundchanger 0.5s linear normal;
     animation-fill-mode: forwards;

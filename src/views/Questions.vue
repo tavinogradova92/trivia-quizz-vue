@@ -20,7 +20,7 @@ export default {
     },
     methods: {},
     created() {
-        axios.get('https://opentdb.com/api.php?amount=10&category=27&difficulty=easy')
+        axios.get('https://opentdb.com/api.php?amount=10&category=27&difficulty=medium')
             .then(res => this.questions = res.data.results)
             .catch(err => console.log(err))
     }
