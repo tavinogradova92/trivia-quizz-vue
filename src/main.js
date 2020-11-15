@@ -15,7 +15,8 @@ const store = new Vuex.Store({
       score: 0,
       currentQuestionIndex: 0,
       questions: [],
-      chosenAnswers: []
+      chosenAnswers: [],
+      questionsArray: []
   },
   getters: {
     questions: state => {
@@ -24,10 +25,10 @@ const store = new Vuex.Store({
   },
   mutations: {
       increment(state) {
-          state.score += 10;
+        state.score += 10;
       },
       incrementIndex(state) {
-        state.score ++;
+        state.currentQuestionIndex ++;
       },
       SET_Questions (state, questions) {
         state.questions = questions

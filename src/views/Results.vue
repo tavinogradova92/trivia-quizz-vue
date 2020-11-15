@@ -1,10 +1,20 @@
 <template>
     <div id="results-list">
         <div id="results-card">
-            <h1>Results</h1>
-            <h2>Final score: {{ this.$store.state.score }} out of 100</h2>
-            <div id="answers-box" v-bind:key="index" v-for="(chosenAnswer, index) in this.$store.state.chosenAnswers">
-                <p v-html="chosenAnswer"></p>
+            <div class="centered">
+                <h1>Results</h1>
+                <h2>Final score: {{ this.$store.state.score }} out of 100</h2>
+            </div>
+            <div id="match-box" v-bind:key="index" v-for="(chosenAnswer, index) in this.$store.state.chosenAnswers">
+                <h3>Question {{ index + 1 }}</h3>
+                <h4 v-html="questions[index].question"></h4>
+                <div v-if="chosenAnswer == questions[index].correct_answer">
+                    <span v-html="`You chose the correct answer: `"></span><span class="green" v-html="questions[index].correct_answer"></span>
+                </div>
+                <div v-else>
+                    <span v-html="`You chose the wrong answer: `"></span><span class="red" v-html="chosenAnswer"></span><br/>
+                    <span v-html="`The correct answer is: `"></span><span class="green" v-html="questions[index].correct_answer"></span>
+                </div>    
             </div>
         </div>
     </div>
@@ -12,6 +22,8 @@
 
 <script>
 export default {
+    name: "results",
+    props: ["questions"]
 }
 </script>
 
@@ -29,15 +41,26 @@ export default {
     min-height: 70vh;
     width: 70vw;
     margin: 5%;
-    padding-bottom: 5%;
-    justify-items: center;
+    padding: 0 5% 5% 5%;
     align-items: center;
     background-color: #ffffff;
     color: #000000;
+}
+.centered {
+    display: grid;
+    justify-items: center;
 }
 h1 {
     display: flex;
     align-self: start;
     font-size: 3em;
+}
+.green {
+    color: rgb(24, 107, 24);
+    font-weight: bold;
+}
+.red {
+    color: rgb(90, 17, 17);
+    font-weight: bold;
 }
 </style>

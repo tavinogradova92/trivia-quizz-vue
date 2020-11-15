@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view v-bind:questions="questions"></router-view>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  name: 'app'
+	name: 'app',
+	mounted() {
+		this.$store.dispatch('fetchQuestions');
+	},
+	computed: {
+        ...mapState([
+            'questions'
+        ])
+    }
 }
 </script>
 

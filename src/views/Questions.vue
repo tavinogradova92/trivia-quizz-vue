@@ -6,19 +6,13 @@
 
 <script>
 import QuestionCard from '../components/QuestionCard';
-import { mapState } from 'vuex'
 
 export default {
     name: 'questions',
     components: {
         QuestionCard
     },
-    computed: mapState([
-        'questions'
-    ]),
-    mounted() {
-        this.$store.dispatch('fetchQuestions')
-    }
+    props: ["questions"],
 }
 </script>
 

@@ -14,7 +14,7 @@
 
 <script>
 export default {
-    name: 'questions',
+    name: 'question-cards',
     components: {},
     props: ["questions"],
     computed: {
