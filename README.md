@@ -1,4 +1,4 @@
-# Trivia Quiz using Vue, VueX, Axios, CSS Grid, Flexbox and CSS Animations
+# Trivia Quiz using Vue, VueX, APIs, Axios, CSS Grid, Flexbox and CSS Animations
 
 ![project screenshot](src/assets/screenshot1.jpg)
 
