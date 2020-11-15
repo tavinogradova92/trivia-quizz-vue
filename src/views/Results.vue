@@ -16,6 +16,10 @@
                     <span v-html="`The correct answer is: `"></span><span class="green" v-html="questions[index].correct_answer"></span>
                 </div>    
             </div>
+            <div class="button-container">
+                <router-link to="/" class="return-button">Play again</router-link>
+            </div>
+            
         </div>
     </div>
 </template>
@@ -62,5 +66,32 @@ h1 {
 .red {
     color: rgb(90, 17, 17);
     font-weight: bold;
+}
+.button-container {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    margin-top: 5%;
+}
+.return-button {
+    display: block;
+    width: 10vw;
+    height: 5vh;
+    text-decoration: none;
+    color: #000;
+    text-transform: uppercase;
+    padding: 10px;
+    border: 4px solid #20bf6b !important;
+    border-radius: 6px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 600;
+    transition: all 0.3s ease 0s;
+}
+.return-button:hover {
+    color: #494949 !important;
+    border-radius: 50px;
+    border-color: #494949 !important;
+    transition: all 0.3s ease 0s;
 }
 </style>
