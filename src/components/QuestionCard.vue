@@ -25,6 +25,11 @@ export default {
             for(let i = 0 ; i < incorrect.length; i++) {
                 answersArray.push(incorrect[i]);
             }
+            if (answersArray.length > 2) {
+                answersArray.sort(() => Math.random() - 0.5);
+            } else if (answersArray.length == 2) {
+                answersArray.sort().reverse();
+            }
             return answersArray;
         },
         displayedIndex() {
