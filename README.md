@@ -1,4 +1,6 @@
-# trivia-game
+# Trivia Quiz using Vue, VueX, Axios, CSS Grid, Flexbox and CSS Animations
+
+![project screenshot](src/assets/screenshot1.jpg)
 
 ## Project setup
 ```
@@ -20,5 +22,3 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
