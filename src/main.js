@@ -14,7 +14,8 @@ const store = new Vuex.Store({
   state: {
       score: 0,
       currentQuestionIndex: 0,
-      questions: []
+      questions: [],
+      answersArray: []
   },
   getters: {
     questions: state => {

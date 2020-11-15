@@ -5,7 +5,7 @@
             <div class="question-name">
                 <h3 v-html="(questions[this.$store.state.currentQuestionIndex].question)"></h3>
             </div>
-            <div id="answers-box" v-bind:key="answer" v-for="answer in getListOfAnswers()">
+            <div id="answers-box" v-bind:key="answer" v-for="answer in answersArray">
                 <button id="submit-button" v-html="answer" @click="onAnswerClicked(answer)"></button>
             </div>
         </div> 
@@ -16,29 +16,29 @@
 export default {
     name: 'questions',
     components: {},
-    data: function() {
-        return {
-            answersArray: this.getListOfAnswers
-        }
-    },
     props: ["questions"],
-    methods: {
-        getListOfAnswers: function() {
-            this.answersArray = [];
-            this.answersArray.push(this.questions[this.$store.state.currentQuestionIndex].correct_answer);
+    computed: {
+        answersArray() {
+            let answersArray = [];
+            answersArray.push(this.questions[this.$store.state.currentQuestionIndex].correct_answer);
             let incorrect = this.questions[this.$store.state.currentQuestionIndex].incorrect_answers;
             for(let i = 0 ; i < incorrect.length; i++) {
-                this.answersArray.push(incorrect[i]);
+                answersArray.push(incorrect[i]);
             }
-            return this.answersArray;
+            return answersArray;
         },
+        displayedIndex() {
+            let displayedIndex = this.$store.state.currentQuestionIndex + 1;
+            return displayedIndex;
+        }
+    },
+    methods: {
         onAnswerClicked: function(answer) {
             if(this.$store.state.currentQuestionIndex < this.questions.length-1) {
                 if(answer == this.questions[this.$store.state.currentQuestionIndex].correct_answer) {
                     this.$store.commit('increment');
                 }
                 this.$store.state.currentQuestionIndex ++;
-                this.getListOfAnswers();
             } else if (this.$store.state.currentQuestionIndex == this.questions.length-1) {
                 if(answer == this.questions[this.$store.state.currentQuestionIndex].correct_answer) {
                     this.$store.commit('increment');
@@ -46,14 +46,7 @@ export default {
                 this.$router.push({ path: '/results'});
             }
         }
-    },
-    computed: {
-        displayedIndex() {
-            let displayedIndex = this.$store.state.currentQuestionIndex + 1;
-            return displayedIndex;
-        }
-    }
-      
+    } 
 }
 </script>
 
