@@ -14,8 +14,7 @@ const store = new Vuex.Store({
   state: {
       score: 0,
       currentQuestionIndex: 0,
-      questions: [],
-      answersArray: []
+      questions: []
   },
   getters: {
     questions: state => {
@@ -31,15 +30,7 @@ const store = new Vuex.Store({
     },
       SET_Questions (state, questions) {
         state.questions = questions
-      },
-      listOfAnswers(state) {
-        state.answersArray.push(state.questions[state.currentQuestionIndex].correct_answer);
-        let incorrect = state.questions[state.currentQuestionIndex].incorrect_answers;
-        for(let i = 0 ; i < incorrect.length; i++) {
-          state.answersArray.push(incorrect[i]);
-        }
-        return state.answersArray;
-    }
+      }
   },
   actions: {
     fetchQuestions({commit}) {
