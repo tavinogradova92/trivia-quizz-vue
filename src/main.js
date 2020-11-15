@@ -15,7 +15,7 @@ const store = new Vuex.Store({
       score: 0,
       currentQuestionIndex: 0,
       questions: [],
-      answersArray: []
+      chosenAnswers: []
   },
   getters: {
     questions: state => {
@@ -28,7 +28,7 @@ const store = new Vuex.Store({
       },
       incrementIndex(state) {
         state.score ++;
-    },
+      },
       SET_Questions (state, questions) {
         state.questions = questions
       }

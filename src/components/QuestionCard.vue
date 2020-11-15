@@ -44,10 +44,12 @@ export default {
                     this.$store.commit('increment');
                 }
                 this.$store.state.currentQuestionIndex ++;
+                this.$store.state.chosenAnswers.push(answer);
             } else if (this.$store.state.currentQuestionIndex == this.questions.length-1) {
                 if(answer == this.questions[this.$store.state.currentQuestionIndex].correct_answer) {
                     this.$store.commit('increment');
                 }
+                this.$store.state.chosenAnswers.push(answer);
                 this.$router.push({ path: '/results'});
             }
         }

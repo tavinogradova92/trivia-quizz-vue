@@ -3,8 +3,8 @@
         <div id="results-card">
             <h1>Results</h1>
             <h2>Final score: {{ this.$store.state.score }} out of 100</h2>
-            <div id="answers-box" v-bind:key="answer" v-for="answer in listOfAnswers">
-                <p v-html="answer"></p>
+            <div id="answers-box" v-bind:key="index" v-for="(chosenAnswer, index) in this.$store.state.chosenAnswers">
+                <p v-html="chosenAnswer"></p>
             </div>
         </div>
     </div>
@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
 #results-list {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -26,8 +26,9 @@ export default {
 }
 #results-card {
     display: grid;
-    height: 70vh;
+    min-height: 70vh;
     width: 70vw;
+    margin: 5%;
     padding-bottom: 5%;
     justify-items: center;
     align-items: center;
