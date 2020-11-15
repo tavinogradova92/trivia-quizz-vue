@@ -16,7 +16,7 @@
                     <span v-html="`The correct answer is: `"></span><span class="green" v-html="questions[index].correct_answer"></span>
                 </div>    
             </div>
-            <div class="button-container">
+            <div class="button-container" @click="refreshData()">
                 <router-link to="/" class="return-button">Play again</router-link>
             </div>
             
@@ -27,7 +27,12 @@
 <script>
 export default {
     name: "results",
-    props: ["questions"]
+    props: ["questions"],
+    methods: {
+        refreshData: function() {
+            window.location.reload()
+        }
+    }
 }
 </script>
 
